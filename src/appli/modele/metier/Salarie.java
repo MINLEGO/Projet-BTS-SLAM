@@ -19,7 +19,9 @@ public class Salarie {
     private String situationFamiliale;
     private int nbrEnfants;
     private Service service;
+
     private Categorie Categorie;
+
     /**
      * Constructeur du salarié sans service associé
      * @param code  matricule du salarié
@@ -43,7 +45,10 @@ public class Salarie {
         this.situationFamiliale = situationFamiliale;
         this.nbrEnfants = nbrEnfants;
         this.service = null;
+
         this.Categorie = null;  // ajout
+
+
     }
     
     /** 
@@ -58,12 +63,15 @@ public class Salarie {
      * @param situationFamiliale Marié, Célibataire, ...
      * @param nbrEnfants    nombre d'enfants
      * @param serv          objet Service représentant le service danns lequel travaille le salarié
+
      * @param Cat
      */
     public Salarie(String code, String nom, String prenom, Date dateNaiss, Date dateEmbauche, String fonction, double tauxHoraire, String situationFamiliale, int nbrEnfants, Service serv ,Categorie Cat) {
         this( code,  nom, prenom,  dateNaiss,  dateEmbauche,  fonction,  tauxHoraire,  situationFamiliale,  nbrEnfants);
         this.service = serv;
         this.Categorie = Cat; //Ajout 
+
+    
     }
     
     @Override
@@ -72,11 +80,16 @@ public class Salarie {
         String dateEmbFmt = String.format("%1$td/%1$tm/%1$tY  ", dateEmbauche);
         String txHoraireFmt = String.format(Locale.FRANCE, "%1$5.2f", tauxHoraire);
         String serviceToString = (service == null ? "Néant" : service.toStringEtat());
+
         String CategorieToString =(Categorie == null ? "Néant" : Categorie.toString()) ; 
         return "Salarie{" + "code=" + code + ", nom=" + nom + ", prenom=" + prenom + ", dateNaiss=" + dateNaissFmt + ", dateEmbauche=" + dateEmbFmt
                 + ", fonction=" + fonction + ", tauxHoraire=" + txHoraireFmt + ", situationFamiliale=" + situationFamiliale + ", nbrEnfants=" + nbrEnfants
                 + ",\n service=" + serviceToString + '}'
                 + ",\n Categorie=" + CategorieToString + '}';  // ajout
+
+       
+
+
     }
     
     public String getCode() {
@@ -159,6 +172,7 @@ public class Salarie {
     public void setService(Service service) {
         this.service = service;
     }
+
     public Categorie getCategorie() {
     return Categorie;
 }

@@ -68,7 +68,9 @@ public class DaoSalarie {
     private static Salarie creerSalarie(ResultSet rs) throws SQLException, IOException, FileNotFoundException, ConnexionBDDException {
         Salarie unSalarie = null;
         // Récupération du service du salarié
-        
+
+        Service unService = DaoService.getOneById(rs.getInt("CodeServ"));
+  
         unSalarie = new Salarie(
                 rs.getString("Code"),
                 rs.getString("Nom"),
