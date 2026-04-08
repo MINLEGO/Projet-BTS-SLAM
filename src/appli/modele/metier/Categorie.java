@@ -68,6 +68,15 @@ public class Categorie {
     public String toString() {
         return "Categorie{" + "code=" + code + ", libelle=" + libelle + ", salaireMini=" + salaireMini + ", caisseRetraite=" + caisseRetraite + ", prime=" + prime + '}';
     }
+
+    public String toStringEtat() {
+        return "Categorie { code=" + code
+                + ", libelle=" + libelle
+                + ", salaireMini=" + salaireMini
+                + ", caisseRetraite=" + caisseRetraite
+                + ", prime=" + prime
+                + " }";
+    }
  
  
 
