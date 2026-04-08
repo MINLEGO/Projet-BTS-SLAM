@@ -20,7 +20,7 @@ public class TestDaoCategorie {
     /**
      * @param args the command line arguments
      */
-    public static  TestDaoCategoriegs) {
+    public static void main(String[] args) {
         ConnexionBDD.setParametresConnexion("jdbc:mysql://localhost/SIRH", "sirh_util", "secret");
         // Test 1 getOneById
         System.out.println("\n Test 1 : DaoCategorie.getOneById");
