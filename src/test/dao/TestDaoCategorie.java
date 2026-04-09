@@ -6,7 +6,7 @@ package test.dao;
 
 import appli.exceptions.ConnexionBDDException;
 import appli.modele.dao.ConnexionBDD;
-import appli.modele.metier.DaoCategorie;
+import appli.modele.dao.DaoCategorie;
 import appli.modele.metier.Categorie;
 import java.io.IOException;
 import java.sql.SQLException;
