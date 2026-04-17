@@ -66,10 +66,20 @@ public class DaoSalarie {
      * @throws IOException 
      */
     private static Salarie creerSalarie(ResultSet rs) throws SQLException, IOException, FileNotFoundException, ConnexionBDDException {
-        Salarie unSalarie = null;
-        // Récupération du service du salarié
-        Service unService = DaoService.getOneById(rs.getInt("CodeServ"));
-        unSalarie = new Salarie(
+        Service unService = null;
+        Categorie uneCategorie = null;
+
+        int codeService = rs.getInt("CodeServ");
+        if (!rs.wasNull()) {
+            unService = DaoService.getOneById(codeService);
+        }
+
+        String codeCategorie = rs.getString("NumCat");
+        if (codeCategorie != null) {
+            uneCategorie = DaoCategorie.getOneById(codeCategorie);
+        }
+
+        Salarie unSalarie = new Salarie(
                 rs.getString("Code"),
                 rs.getString("Nom"),
                 rs.getString("Prenom"),
@@ -78,9 +88,11 @@ public class DaoSalarie {
                 rs.getString("Fonction"),
                 rs.getDouble("TauxHoraire"),
                 rs.getString("situationFamiliale"),
-                rs.getInt("NbrEnfants"),
-                unService
+                rs.getInt("NbrEnfants")
+                
         );
+        unSalarie.setService(unService);
+        unSalarie.setCategorie(uneCategorie);
         return unSalarie;
     }
 

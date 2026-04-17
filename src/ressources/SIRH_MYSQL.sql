@@ -1,10 +1,9 @@
 --
 -- Base de données: SIRH
 --
-CREATE DATABASE SIRH DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 USE SIRH;
-CREATE USER 'sirh_util'@'localhost' IDENTIFIED BY 'secret';
-GRANT ALL PRIVILEGES ON SIRH.* to 'sirh_util'@'localhost';
+
 
 -- --------------------------------------------------------
 

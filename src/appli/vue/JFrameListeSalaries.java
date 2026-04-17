@@ -8,6 +8,7 @@ import appli.exceptions.ImageDefondNonTrouveeException;
 import java.util.List;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.sql.SQLException;
 
 import javax.swing.*;
@@ -146,6 +147,12 @@ public class JFrameListeSalaries extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableSalaries);
 
+        jComboBoxLesServices.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxLesServicesItemStateChanged(evt);
+            }
+        });
+
         jLabel2.setText("Service :");
 
         jButtonQuitter.setText("Quitter");
@@ -229,6 +236,37 @@ public class JFrameListeSalaries extends javax.swing.JFrame {
         this.dispose(); // libération de l'objet JFrame
         System.exit(0); // fin de l'exécution du programme
     }//GEN-LAST:event_jButtonQuitterActionPerformed
+
+    private void jComboBoxLesServicesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxLesServicesItemStateChanged
+        if (evt.getStateChange() != java.awt.event.ItemEvent.SELECTED) {
+            return;
+        }
+
+        try {
+            Service serviceSelectionne = (Service) jComboBoxLesServices.getSelectedItem();
+            List<Salarie> lesSalaries = DaoSalarie.getAll();
+
+            if (serviceSelectionne != null && serviceSelectionne.getCode() != 0) {
+                List<Salarie> salariesFiltrees = new java.util.ArrayList<>();
+                for (Salarie unSalarie : lesSalaries) {
+                    if (unSalarie.getService() != null
+                            && unSalarie.getService().getCode() == serviceSelectionne.getCode()) {
+                        salariesFiltrees.add(unSalarie);
+                    }
+                }
+                remplirJTableSalaries(salariesFiltrees);
+            } else {
+                remplirJTableSalaries(lesSalaries);
+            }
+        } catch (IOException | SQLException | ConnexionBDDException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "JFrameListeSalaries - pb mise a jour de la liste des salaries : \n" + ex.getMessage(),
+                    "Incident",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jComboBoxLesServicesItemStateChanged
 
     /**
      * Remplir la liste déroulante des noms de services
